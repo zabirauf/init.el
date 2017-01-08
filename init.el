@@ -4,12 +4,86 @@
      ("marmalade" . "http://marmalade-repo.org/packages/")
      ("melpa" . "http://melpa.milkbox.net/packages/")))
 
+;; Load and activate emacs packages. Do this first so that the
+;; packages are loaded before you start trying to modify them.
+;; This also sets the load path. If not done then functions like
+;; package-installed-p won't be recognized
+(package-initialize)
+
 ;; Setting apropos to sort by score
 (setq apropos-sort-by-scores t)
 
 ;; Enabling the windmove by default which allows to switch
 ;; to windows using SHIFT <left>, <right>, <up>, <down>
 (windmove-default-keybindings)
+
+;; The packages that need to be installed
+(defvar my-packages
+  '(;; key binding and code colorization for clojure
+    ;; https://github.com/clojure-emacs/clojure-mode
+    clojure-mode
+
+    ;; extra syntax highlighting for clojure
+    clojure-mode-extra-font-locking
+
+    ;; integration with a Clojure REPL
+    ;; https://github.com/clojure-emacs/cide
+    cider
+
+    ;; makes handling lisp expressions much, much easier
+    ;; Cheatsheet: https://www.emacswiki.org/emacs/ParaeditCheatsheet
+    paredit
+
+    ;; Enchanges M-x to allow easier execution of commands. Provides
+    ;; a filterable list of possible commands in the minibuffer
+    ;; http://www.emacswiki.org/emacs/Smex
+    ;; https://github.com/nonsequitur/smex
+    smex
+    
+    ;; allow ido usage in as many contexsta as possible.
+    ;; see customization/navigation.el line 23 for a description
+    ;; of ido
+    ido-ubiquitous
+
+    ;; project navigation
+    projectile
+
+    ;; colorful paranthesis matching
+    rainbow-delimiters
+
+    ;; edit html tags like sexps
+    tagedit
+
+    ;; git integration
+    magit))
+
+;; On OS X, an Emacs instance started from the graphical user
+;; interface will have a different environment than a shell in a
+;; terminal window, because OS X does not run a shell during the
+;; login. Obviously this will lead to unexpected results when
+;; calling external utilities like make from Emacs.
+;; This library works around this problem by copying important
+;; environment variables from the user's shell.
+;; https://github.com/purcell/exec-path-from-shell
+(if (eq system-type 'darwin)
+    (add-to-list 'my-packages 'exec-path-from-shell))
+
+;; Go over the list of my-packages and install them if not installed
+(dolist (p my-packages)
+  (when (not (package-installed-p p))
+    (package-install p)))
+
+;; Initializing smex on startup
+;; Also set the global M-x & M-X binding to launch smex instead
+;; of the default command executor
+;; => C-h f, while Smex is active will describe the command
+;; => C-h w, shows the keybinding of the selected command
+;; => M-. Jumps to the definition of the selected command
+(require 'smex)
+(smex-initialize)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command) ;; This is the old M-x
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
