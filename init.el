@@ -30,6 +30,17 @@
     ;; https://github.com/clojure-emacs/cide
     cider
 
+    ;; Typescript majore mode
+    typescript-mode
+
+    ;; Typescript interactive development environment
+    ;; https://github.com/ananthakumaran/tide
+    tide
+
+    ;; On the fly syntax checking
+    ;; https://github.com/flycheck/flycheck
+    flycheck
+    
     ;; makes handling lisp expressions much, much easier
     ;; Cheatsheet: https://www.emacswiki.org/emacs/ParaeditCheatsheet
     paredit
@@ -53,6 +64,9 @@
 
     ;; edit html tags like sexps
     tagedit
+
+    ;; Company mode
+    company
 
     ;; git integration
     magit))
