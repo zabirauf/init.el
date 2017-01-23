@@ -71,6 +71,7 @@
     ;; git integration
     magit))
 
+
 ;; On OS X, an Emacs instance started from the graphical user
 ;; interface will have a different environment than a shell in a
 ;; terminal window, because OS X does not run a shell during the
@@ -86,6 +87,10 @@
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
+
+;; Initializing the exec-path-from-shell on startup for Mac
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
 
 ;; Initializing smex on startup
 ;; Also set the global M-x & M-X binding to launch smex instead

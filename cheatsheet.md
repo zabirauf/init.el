@@ -69,3 +69,24 @@ Emacs keys cheatsheet
 | C-h d             | Apropos search the documentation               |      |
 | key-binding C-h   | Show help corresponding the the key binding    |      |
 
+## Cider Mode
+
+| Keys        | Description                                            | Note                                                     |
+|-------------+--------------------------------------------------------+----------------------------------------------------------|
+| C-c C-k     | Evaluate the buffer in the repl                        | Needs the file to be saved                               |
+| C-x C-e     | Evaluate the last expression in repl                   | If you want to execute current line then prefix with C-e |
+| C-c M-n     | Switch to namespace of current buffer in repl          |                                                          |
+| C-c C-d C-d | Display documentation for symbol at point              | If no symbol then it prompts for it                      |
+| M-.         | Navigate to the source code for the symbol under point |                                                          |
+| M-,         | Navigate back from the source code                     |                                                          |
+| C-c C-d C-a | Apropos search across function name and documentation  |                                                          |
+| C-enter     | REPL: Close parantheses and evaluate                   | REPL only command                                        |
+
+## Paraedit
+
+| Keys         | Description                                                             | Note |
+|--------------+-------------------------------------------------------------------------+------|
+| M-(          | Surround expression after point in parenthesis                          |      |
+| C- ->        | Slurp; move closing parenthesis to the right to include next expression |      |
+| C- <-        | Barf; move closing parenthesis to the left to exclude last expression   |      |
+| C-M-f, C-M-b | Move to the opening/closing parenthesis                                 |      |
