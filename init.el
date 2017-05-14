@@ -104,6 +104,14 @@
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command) ;; This is the old M-x
 
+;; Set minor modes to open for Clojure mode
+;; This includes Paredit, Cider
+(require 'clojure-mode)
+(defun turn-on-paredit () (paredit-mode 1))
+(defun turn-on-cider () (cider-mode 1))
+(add-hook 'clojure-mode 'turn-on-paredit)
+(add-hook 'clojure-mode 'turn-on-cider)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
